@@ -1,0 +1,25 @@
+.content_landscape {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+}
+
+.content_main {
+    padding: 20px;
+}
+
+.profile_container {
+    display: flex;
+}
+
+.profile_avatar img {
+    max-height: 100px;
+    margin-right: 20px;
+    border-radius: 10%;
+}
+
+.profile__username {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 2;
+}

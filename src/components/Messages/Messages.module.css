@@ -1,0 +1,108 @@
+.messages {
+    display: grid;
+    grid-template-columns: 3fr 10fr;
+    padding: 20px 20px;
+}
+
+.dialogs_list {
+    background-color: #dae7ff;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-right: 10px;
+}
+
+.dialog_item {
+    line-height: 2;
+    margin-bottom: 5px;
+}
+
+.dialog_item:hover {
+    width: 110%;    
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    background-color: rgba(143, 162, 214, 0.5);
+}
+
+.dialog_item .active {
+    font-weight: 600;
+    width: 100%;
+
+    background-color: #1640b3;
+    color: #fff;
+}
+
+.dialog_item a {
+    display: block;    
+    padding-left: 15px;
+    padding-right: 10px;    
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    color: #000;
+    text-decoration: none;
+}
+
+.dialog_item.active a {
+    color: #fff;
+}
+
+.messages_list {
+    padding: 0px 20px 10px 20px;
+    margin-bottom: 5px;
+    border-top-right-radius: 10px;
+
+    background-color: #fff;
+    border:#1640b3 2px solid;
+}
+
+.message_item {
+    margin: 16px 0;
+}
+
+.message_item.out {
+    text-align: right;
+}
+
+.message_item.out .message_item__text {
+    background-color: #a2c3ff;
+}
+
+.message_item__text {
+    display: inline;
+    padding: 6px 10px;
+    border-radius: 5px;
+
+    background-color: #dae7ff;
+    font-size: 0px;
+
+    animation: show 0.2s 1;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+@keyframes show {
+    0% {
+        font-size: 0px;
+    }
+    100% {
+        font-size: 13px;
+    }
+}
+
+.send_message {
+    display: grid;
+    grid-template-columns: 10fr 2fr;
+}
+
+.send_message textarea {
+    border: #1640b3 2px solid;
+}
+
+.send_message button {
+    border: none;
+    border-bottom-right-radius: 10px;
+
+    background-color: #1640b3;
+    color: #fff;
+}
