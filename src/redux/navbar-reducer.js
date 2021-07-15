@@ -4,6 +4,7 @@ const initialState = {
         {url: '/messages', name: 'Messages'},
         {url: '/news', name: 'News'},
         {url: '/music', name: 'Music'},
+        {url: '/users', name: 'Users'},
         {url: '/settings', name: 'Settings'},
     ],
 

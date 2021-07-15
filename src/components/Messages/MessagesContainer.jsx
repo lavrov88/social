@@ -1,5 +1,5 @@
 import React from 'react';
-import { sendMessageActionCreator, updateMessageInputActionCreator } from '../../redux/messages-reducer';
+import { clearNewStatusActionCreator, sendMessageActionCreator, updateMessageInputActionCreator } from '../../redux/messages-reducer';
 import Messages from './Messages';
 import {connect} from 'react-redux';
 
@@ -16,8 +16,11 @@ const mapDispatchToProps = (dispatch) => {
         onMessageTextChange: (text) => {
             dispatch(updateMessageInputActionCreator(text))
         },
-        onMessageSend: () => {
-            dispatch(sendMessageActionCreator())
+        onMessageSend: (messageInputItem) => {
+            dispatch(sendMessageActionCreator());
+            setTimeout(() => {
+                dispatch(clearNewStatusActionCreator());
+            }, 500);
         }
     }
 }

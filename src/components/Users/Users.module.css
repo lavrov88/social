@@ -1,0 +1,97 @@
+.users_list {
+    padding: 40px 20px 20px 20px;
+}
+
+.user_item {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    margin-bottom: 30px;
+}
+
+.avatar_wrapper {
+    display: block;
+}
+
+.user_item__avatar {
+    display: block;
+    margin: 0 auto;
+    width: 65px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.user_item__follow_btn {
+    display: block;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 65px;
+
+    background-color: #1640b3;
+    color: #fff;
+}
+
+.user_item__unfollow_btn {
+    display: block;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 65px;
+
+    background-color: #ac0025;
+    color: #fff;
+}
+
+.user_item__right {
+    display: grid;
+    grid-template-columns: 10fr 2fr;
+    padding: 0 20px;
+    border-radius: 10px;
+
+    background-color: #dce1e9;
+}
+
+.user_item__name_and_status {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user_item__user_fullname {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.user_item__user_status {
+    font-size: 14px;
+}
+
+.user_item__location {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user_item__location p {
+    margin: 0;
+    margin-bottom: 10px;
+
+    text-align: right;
+    font-weight: 500;
+}
+
+.users__show_more {
+    display: block;
+    margin: 0px auto 30px;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 150px;
+
+    background-color: #1640b3;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+}

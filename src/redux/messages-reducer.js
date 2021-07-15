@@ -1,5 +1,6 @@
 const UPDATE_MESSAGE_INPUT = 'UPDATE-MESSAGE-INPUT';
 const SEND_MESSAGE = 'SEND-MESSAGE';
+const CLEAR_NEW_STATUS = 'CLEAR_NEW_STATUS';
 
 const initialState = {
     dialogs: [
@@ -11,11 +12,11 @@ const initialState = {
     ],
 
     messages: [
-        {id: 1, type: 'in', text: 'Привет'},
-        {id: 2, type: 'in', text: 'Как сам?'},
-        {id: 3, type: 'out', text: 'Привет'},
-        {id: 4, type: 'out', text: 'Да нормально'},
-        {id: 5, type: 'in', text: 'Ништяк'},
+        {id: 1, type: 'in', text: 'Привет', new: false},
+        {id: 2, type: 'in', text: 'Как сам?', new: false},
+        {id: 3, type: 'out', text: 'Привет', new: false},
+        {id: 4, type: 'out', text: 'Да нормально', new: false},
+        {id: 5, type: 'in', text: 'Ништяк', new: false},
     ],
 
     newMessageInput: ''
@@ -33,12 +34,24 @@ const messageReducer = (state = initialState, action) => {
             let newMessage = {
                 id: state.messages[state.messages.length - 1].id + 1,
                 type: 'out',
-                text: state.newMessageInput
+                text: state.newMessageInput,
+                new: true
             }
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
                 newMessageInput: ''
+            }
+        }
+        case CLEAR_NEW_STATUS: {
+            return {
+                ...state,
+                messages: state.messages.map(m => {
+                    if (m.new === true) {
+                        return {...m, new: false}
+                    }
+                    return m;
+                })
             }
         }
         default:
@@ -48,4 +61,5 @@ const messageReducer = (state = initialState, action) => {
 
 export const updateMessageInputActionCreator = (text) => ({type: UPDATE_MESSAGE_INPUT, text: text});
 export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
+export const clearNewStatusActionCreator = () => ({type: CLEAR_NEW_STATUS})
 export default messageReducer;
