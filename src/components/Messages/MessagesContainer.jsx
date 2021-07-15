@@ -3,28 +3,6 @@ import { sendMessageActionCreator, updateMessageInputActionCreator } from '../..
 import Messages from './Messages';
 import {connect} from 'react-redux';
 
-// const oldMessagesContainer = (props) => {
-
-//     const store = props.store;
-
-//     const onMessageTextChange = (text) => {
-//         store.dispatch(updateMessageInputActionCreator(text));
-//     }
-
-//     const onMessageSend = () => {
-//         store.dispatch(sendMessageActionCreator());
-//     }
-
-//     return (
-//         <Messages
-//         dialogs={store.getState().messagesPage.dialogs}
-//         messages={store.getState().messagesPage.messages}
-//         newMessageInput={store.getState().messagesPage.newMessageInput}
-//         onMessageTextChange={onMessageTextChange}
-//         onMessageSend={onMessageSend} />
-//     )
-// }
-
 const mapStateToProps = (state) => {
     return {
         dialogs: state.messagesPage.dialogs,
