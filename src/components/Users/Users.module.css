@@ -30,6 +30,11 @@
 
     background-color: #1640b3;
     color: #fff;
+    cursor: pointer;
+}
+
+.user_item__follow_btn:hover {
+    background-color: #2d5fe7;
 }
 
 .user_item__unfollow_btn {
@@ -42,6 +47,11 @@
 
     background-color: #ac0025;
     color: #fff;
+    cursor: pointer;
+}
+
+.user_item__unfollow_btn:hover {
+    background-color: #dd1212;
 }
 
 .user_item__right {
@@ -95,3 +105,29 @@
     font-size: 16px;
     font-weight: 500;
 }
+
+.users__pagination {
+    margin: 30px auto 0px;
+    display: flex;
+    flex-wrap: wrap;
+
+    word-break:keep-all;
+}
+
+.users__pagination_item {
+    display: block;
+    margin: 0 10px;
+
+    cursor: pointer;
+}
+
+.users__pagination_item:hover {
+    color: #ff650b;
+}
+
+.users__pagination_item.active {
+    font-weight: 700;
+    font-size: 20px;
+    color: #ff650b;
+}
+
