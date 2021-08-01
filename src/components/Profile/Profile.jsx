@@ -8,9 +8,8 @@ const Profile = (props) => {
         <div className={s.content}>
             <img alt="" className={s.content_landscape} src="https://www.canon.ru/media/PCA%20Exercise%20-%20Landscape%20Photography%20exercise-landscape-photos-opener-05_1200%20x%20400_tcm203-1444470.jpg"></img>
             <div className={s.content_main}>
-                <ProfileInfo />
-                <MyPostsContainer
-                    store={props.store} />
+                <ProfileInfo profile={props.profile} />
+                <MyPostsContainer store={props.store} />
             </div>
         </div>
     )

@@ -5,36 +5,6 @@ import { addPostActionCreator,
     updateNewPostTitleActionCreator } from '../../../redux/profile-reducer';
 import { connect } from 'react-redux';
 
-// const oldMyPostsContainer = (props) => {
-
-//     const store = props.store;
-
-//     const onTitleChange = (text) =>{
-//         const action = updateNewPostTitleActionCreator(text);
-//         store.dispatch(action);
-//     }
-
-//     const onPostChange = (text) =>{
-//         const action = updateNewPostTextActionCreator(text);
-//         store.dispatch(action);
-//     }
-
-//     const addPost = () => {
-//         const action = addPostActionCreator();
-//         store.dispatch(action);
-//     }
-
-
-//     return (
-//         <MyPosts 
-//             posts={store.getState().profilePage.posts} 
-//             newPostTitleInput={store.getState().profilePage.newPost.newPostTitleInput}
-//             newPostTextInput={store.getState().profilePage.newPost.newPostTextInput}
-//             onTitleChange={onTitleChange}
-//             onPostChange={onPostChange}
-//             onAddPost={addPost} />
-//     )
-// }
 
 const mapStateToProps = (state) => {
     return {

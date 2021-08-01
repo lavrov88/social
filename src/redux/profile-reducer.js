@@ -1,8 +1,12 @@
 const UPDATE_NEW_POST_TITLE = 'UPDATE-NEW-POST-TITLE';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const initialState = {
+
+    profile: null,
+
     newPost: {
         newPostTitleInput: '',
         newPostTextInput: ''
@@ -35,7 +39,7 @@ const profileReducer = (state = initialState, action) => {
                 }
             }
         }
-        case ADD_POST:{
+        case ADD_POST: {
             let addZero = (num) => {
                 if (+num < 10) {
                     return `0${num}`;
@@ -61,11 +65,15 @@ const profileReducer = (state = initialState, action) => {
                 }
             }
         }
+        case SET_USER_PROFILE: {
+            return {...state, profile: action.profile}
+        }
         default:
             return state;
     }
 }
 
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const updateNewPostTitleActionCreator = (text) => ({type: UPDATE_NEW_POST_TITLE, text: text});
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, text: text});
 export const addPostActionCreator = () => ({type: ADD_POST});

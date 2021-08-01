@@ -110,8 +110,8 @@
     margin: 30px auto 0px;
     display: flex;
     flex-wrap: wrap;
-
-    word-break:keep-all;
+    justify-content: center;
+    align-items: center;
 }
 
 .users__pagination_item {
