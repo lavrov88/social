@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Users.module.css';
 import userProfileImage from '../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
-import { userAPI } from '../../api/api';
+import { usersAPI } from '../../api/api';
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -50,34 +50,13 @@ let Users = (props) => {
                                 </div>
                                 {u.followed
 
-                                    ? <button onClick={() => {
-                                        props.toggleIsLoading(true);
-                                        // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                        //     withCredentials: true,
-                                        //     headers: {
-                                        //         "API-KEY": "398d65df-f6f7-4c97-bcae-4a9af02f64f4"
-                                        //     }
-                                        // })
-                                        userAPI.unfollowUser(u.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.unfollow(u.id)
-                                                }
-                                                props.toggleIsLoading(false);
-                                            });
-                                        }} className={s.user_item__unfollow_btn}>Unfollow</button>
+                                    ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                        onClick={() => { props.unfollow(u.id) }}
+                                        className={s.user_item__unfollow_btn} >Unfollow</button>
 
-                                    : <button onClick={() => {
-                                        props.toggleIsLoading(true);
-                                        userAPI.followUser(u.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.follow(u.id)
-                                                }
-                                                props.toggleIsLoading(false);
-                                            });
-                                    }
-                                    } className={s.user_item__follow_btn}>Follow</button>}
+                                    : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                        onClick={() => {props.follow(u.id)}}
+                                        className={s.user_item__follow_btn}>Follow</button>}
 
                             </div>
                             <div className={s.user_item__right}>

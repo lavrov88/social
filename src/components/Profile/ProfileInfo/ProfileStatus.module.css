@@ -1,0 +1,30 @@
+.profile__user_status {
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: 100%;
+
+    background-color: #81abeb;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.profile__user_status_btns {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.profile__user_status_btns button{
+    margin-right: 5px;
+    padding: 4px 12px;
+    border: none;
+    border-radius: 3px;
+
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: rgb(22, 64, 179);
+}
+
+.profile__user_status_btns button:last-of-type {
+    background-color: rgb(187, 7, 7);
+}

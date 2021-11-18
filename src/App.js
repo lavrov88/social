@@ -9,11 +9,14 @@ import Settings from './components/Settings/Settings';
 import {BrowserRouter, Route} from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import LoginContainer from './components/Login/LoginContainer';
+import { Provider } from 'react-redux';
 
 function App(props) {
 
   return (
     <BrowserRouter>
+      <Provider store={props.store}>
         <div className="app_wrapper">
             <HeaderContainer store={props.store} />
             <NavbarContainer store={props.store} />
@@ -27,8 +30,10 @@ function App(props) {
                 <Route path='/music' render={ () =>  <Music />}/>
                 <Route path='/users' render={ () =>  <UsersContainer store={props.store} />}/>
                 <Route path='/settings' render={ () =>  <Settings />}/>
+                <Route path='/login' component={LoginContainer} />
             </div>
         </div>
+      </Provider>
     </BrowserRouter>
   );
 }

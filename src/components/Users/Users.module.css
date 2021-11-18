@@ -54,6 +54,10 @@
     background-color: #dd1212;
 }
 
+.user_item__follow_btn:disabled, .user_item__unfollow_btn:disabled {
+    background-color: #999ead;
+}
+
 .user_item__right {
     display: grid;
     grid-template-columns: 10fr 2fr;

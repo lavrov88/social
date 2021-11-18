@@ -2,14 +2,17 @@ import React from 'react';
 import s from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import userProfileImage from '../../assets/images/user.png';
-
+import { getUserProfile } from '../../redux/profile-reducer';
 
 const Links = (props) => {
     const linksElements = props.links
         .map(l => {
             return (
                 <li key={l.url} className={s.nav_li_item}>
-                    <NavLink key={l.url} to={l.url} className={s.nav_item} activeClassName={s.active}>{l.name}</NavLink>
+                    <NavLink key={l.url} 
+                    to={l.url} 
+                    className={s.nav_item} 
+                    activeClassName={s.active}>{l.name}</NavLink>
                 </li>
             )
         });

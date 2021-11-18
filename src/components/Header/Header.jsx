@@ -7,7 +7,8 @@ const Header = (props) => {
     return (
         <header className={s.header}>
             <div className={s.header_logo}>
-                <img alt="" src="https://logomaster.ai/static/media/gallery002.27efc7d2.png"></img>
+                {/* <img alt="" src="https://logomaster.ai/static/media/gallery002.27efc7d2.png"></img> */}
+                <h2>Social Network</h2>
             </div>            
             <div className={s.header_auth}>
                 <div className={s.header_auth__avatar}>
