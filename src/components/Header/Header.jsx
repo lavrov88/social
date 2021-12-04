@@ -7,7 +7,6 @@ const Header = (props) => {
     return (
         <header className={s.header}>
             <div className={s.header_logo}>
-                {/* <img alt="" src="https://logomaster.ai/static/media/gallery002.27efc7d2.png"></img> */}
                 <h2>Social Network</h2>
             </div>            
             <div className={s.header_auth}>
@@ -18,7 +17,11 @@ const Header = (props) => {
                 </div>
                 <div className={s.header_auth__username}>
                     {props.authData.isAuthorised === true
-                        ? <NavLink to="/login"><p>Logged user:</p><p>{props.authData.login}</p></NavLink>
+                        ? <div>
+                           <p>Logged user:</p>
+                           <p>{props.authData.login}</p>
+                           <p><button onClick={props.logout}>Log out</button></p>
+                        </div>
                         : <NavLink to="/login">Login</NavLink>}
                 </div> 
             </div>

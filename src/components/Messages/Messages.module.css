@@ -110,17 +110,19 @@
 }
 
 .send_message {
+   border: 2px #1640b3 solid;
+   border-bottom-right-radius: 10px;
+   overflow: hidden;
+}
+
+.send_message form {
     display: grid;
     grid-template-columns: 10fr 2fr;
 }
 
-.send_message textarea {
-    border: #1640b3 2px solid;
-}
-
 .send_message button {
     border: none;
-    border-bottom-right-radius: 10px;
+    height: 100%;
 
     background-color: #1640b3;
     color: #fff;

@@ -7,21 +7,24 @@
     justify-content: space-between;
 
     background-color:#4489f0;
+    color: #fff;
     border-radius: 20px;
 }
 
 .header_logo {
     grid-area: logo;
+    display: flex;
+    justify-content: start;
+    align-items: start;
     width: 20%;
     height: 100%;
     overflow: hidden;
 }
 
-.header_logo img {
-    height: 100%;
-    width: auto;
-
-    border-radius: 20px;
+.header_logo h2 {
+   margin: auto;
+   padding-left: 20px;
+   display: block;
 }
 
 .header_auth {

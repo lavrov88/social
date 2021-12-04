@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import NewPostForm from './NewPostForm/NewPostForm';
+import NewPost from './NewPostForm/NewPostForm';
 
 const MyPosts = (props) => {
     let sortById = (a, b) => {
@@ -16,11 +16,11 @@ const MyPosts = (props) => {
     return (
         <div className={s.my_posts_section}>
             <span className={s.my_posts_title}>My posts</span>
-            <NewPostForm 
-                newPostTitleInput={props.newPostTitleInput}
-                newPostTextInput={props.newPostTextInput}
-                onTitleChange={props.onTitleChange}
-                onPostChange={props.onPostChange}
+            <NewPost 
+               //  newPostTitleInput={props.newPostTitleInput}
+               //  newPostTextInput={props.newPostTextInput}
+               //  onTitleChange={props.onTitleChange}
+               //  onPostChange={props.onPostChange}
                 onAddPost={props.onAddPost} />
             <div className={s.posts_list}>
                 {postsElements}

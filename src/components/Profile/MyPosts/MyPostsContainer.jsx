@@ -1,8 +1,9 @@
 import React from 'react';
 import MyPosts from './MyPosts';
 import { addPostActionCreator, 
-    updateNewPostTextActionCreator, 
-    updateNewPostTitleActionCreator } from '../../../redux/profile-reducer';
+   //  updateNewPostTextActionCreator, 
+   //  updateNewPostTitleActionCreator 
+   } from '../../../redux/profile-reducer';
 import { connect } from 'react-redux';
 
 
@@ -16,16 +17,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onTitleChange: (text) => {
-            const action = updateNewPostTitleActionCreator(text);
-            dispatch(action);
-        },
-        onPostChange: (text) => {
-            const action = updateNewPostTextActionCreator(text);
-            dispatch(action);
-        },
-        onAddPost: () => {
-            const action = addPostActionCreator();
+      //   onTitleChange: (text) => {
+      //       const action = updateNewPostTitleActionCreator(text);
+      //       dispatch(action);
+      //   },
+      //   onPostChange: (text) => {
+      //       const action = updateNewPostTextActionCreator(text);
+      //       dispatch(action);
+      //   },
+        onAddPost: (data) => {
+            const action = addPostActionCreator(data);
             dispatch(action);
         }
     }

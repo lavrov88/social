@@ -3,29 +3,9 @@
     margin-bottom: 20px;
 }
 
-.post_add_form input {
-    display: block;
-    width: 100%;
-    border: none;
-    height: 20px;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-
-    font-size: 12px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.post_add_form textarea {
-    width: 100%;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-
-    font-size: 12px;
-    font-family: Arial, Helvetica, sans-serif;
+.newPostInputWrapper {
+   margin-top: 10px;
+   margin-bottom: 10px;
 }
 
 .post_add_form button {
@@ -37,3 +17,4 @@
     font-weight: 600;
     background-color: rgb(22, 64, 179);
 }
+

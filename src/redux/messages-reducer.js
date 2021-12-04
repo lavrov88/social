@@ -24,17 +24,11 @@ const initialState = {
 
 const messageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_MESSAGE_INPUT: {
-            return {
-                ...state,
-                newMessageInput: action.text
-            }
-        }
         case SEND_MESSAGE: {
             let newMessage = {
                 id: state.messages[state.messages.length - 1].id + 1,
                 type: 'out',
-                text: state.newMessageInput,
+                text: action.text,
                 new: true
             }
             return {
@@ -59,7 +53,6 @@ const messageReducer = (state = initialState, action) => {
     }
 }
 
-export const updateMessageInputActionCreator = (text) => ({type: UPDATE_MESSAGE_INPUT, text: text});
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
+export const sendMessageActionCreator = (text) => ({type: SEND_MESSAGE, text: text});
 export const clearNewStatusActionCreator = () => ({type: CLEAR_NEW_STATUS})
 export default messageReducer;

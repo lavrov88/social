@@ -1,6 +1,9 @@
 import React from 'react';
 import s from './Messages.module.css';
 import { NavLink, Redirect } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
+import { Textarea } from '../Common/FormsControls/FormsControls';
+import { maxLengthCreator, required } from '../../utils/validators/validators';
 
 const DialogItem = (props) => {
     let path = '/messages/' + props.id;
@@ -33,6 +36,22 @@ const MessageItem = (props) => {
     )
 }
 
+const maxLength10 = maxLengthCreator(10)
+
+const NewMessageForm = (props) => {
+   return (
+      <div className={s.send_message}>
+         <form onSubmit={props.handleSubmit}>
+            <Field component={Textarea} name="messageText"
+               validate={[required, maxLength10]} placeholder="Message's text" />
+            <button>Send</button>
+         </form>
+      </div>
+   )
+}
+
+const NewMessageReduxForm = reduxForm({form: 'newMessage'})(NewMessageForm)
+
 const Messages = (props) => {
 
     let classForType = (type) => {
@@ -47,19 +66,9 @@ const Messages = (props) => {
 
     let dialogsItems = props.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />);
     let messagesItems = props.messages.map(m => <MessageItem key={m.key} type={classForType(m.type)} text={m.text} new={m.new} />);
-    let messageInputItem = React.createRef();
 
-    let onMessageTextChange = () => {
-        let text = messageInputItem.current.value;
-        props.onMessageTextChange(text);
-    }
-
-    let onMessageKeyPress = (e) => {
-        if (e.key === 'Enter') {            
-            setTimeout(() => {
-                props.onMessageSend(); //adds line break without timeout
-            }, 20);
-        }
+    const onMessageSend = (formData) => {
+       props.onMessageSend(formData)
     }
 
     return (
@@ -72,15 +81,7 @@ const Messages = (props) => {
                     <div className={s.messages_list}>
                         {messagesItems}
                     </div>
-                    <div className={s.send_message}>
-                        <textarea 
-                            onChange={onMessageTextChange}
-                            onKeyPress={(e) => {onMessageKeyPress(e)}}
-                            ref={messageInputItem}
-                            value={props.newMessageInput}
-                        />
-                        <button onClick={props.onMessageSend}>Send</button>
-                    </div>
+                    <NewMessageReduxForm onSubmit={onMessageSend} />
                 </div>
             </div>
         </div>

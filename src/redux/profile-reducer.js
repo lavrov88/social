@@ -1,7 +1,7 @@
 import { profileAPI } from "../api/api";
 
-const UPDATE_NEW_POST_TITLE = 'UPDATE-NEW-POST-TITLE';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+// const UPDATE_NEW_POST_TITLE = 'UPDATE-NEW-POST-TITLE';
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
@@ -25,24 +25,24 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_POST_TITLE:{
-            return {
-                ...state,
-                newPost: {
-                    ...state.newPost,
-                    newPostTitleInput: action.text,
-                }
-            }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPost: {
-                    ...state.newPost,
-                    newPostTextInput: action.text,
-                }
-            }
-        }
+      //   case UPDATE_NEW_POST_TITLE:{
+      //       return {
+      //           ...state,
+      //           newPost: {
+      //               ...state.newPost,
+      //               newPostTitleInput: action.text,
+      //           }
+      //       }
+      //   }
+      //   case UPDATE_NEW_POST_TEXT: {
+      //       return {
+      //           ...state,
+      //           newPost: {
+      //               ...state.newPost,
+      //               newPostTextInput: action.text,
+      //           }
+      //       }
+      //   }
         case ADD_POST: {
             let addZero = (num) => {
                 if (+num < 10) {
@@ -55,8 +55,8 @@ const profileReducer = (state = initialState, action) => {
             let newPost = {
                 id: state.posts[0].id + 1,
                 date: `${addZero(nowDate.getDate())}.${addZero(nowDate.getMonth() + 1)}.${nowDate.getFullYear()}`,
-                title: state.newPost.newPostTitleInput,
-                text: state.newPost.newPostTextInput,
+                title: action.title,
+                text: action.text,
                 likesCount: 0
             }
 
@@ -82,9 +82,9 @@ const profileReducer = (state = initialState, action) => {
 
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
-export const updateNewPostTitleActionCreator = (text) => ({type: UPDATE_NEW_POST_TITLE, text: text});
-export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, text: text});
-export const addPostActionCreator = () => ({type: ADD_POST});
+// export const updateNewPostTitleActionCreator = (text) => ({type: UPDATE_NEW_POST_TITLE, text: text});
+// export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, text: text});
+export const addPostActionCreator = (data) => ({type: ADD_POST, title: data.newPostTitle, text: data.newPostText});
 
 export const getUserProfile = (userId) => (dispatch) => {
     profileAPI.getProfile(userId)

@@ -1,0 +1,13 @@
+.login_page {
+   width: max-content;
+   margin: 0 auto;
+}
+
+.login_input {
+   width: 200px;
+   margin-bottom: 10px;
+}
+
+.common_error {
+   color: red;
+}

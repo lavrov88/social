@@ -8,31 +8,34 @@ import { compose } from 'redux';
 class ProfileContainer extends React.Component {
     componentDidMount() {
 
-        let defaultUserData = {
-            aboutMe: "учу реакт",
-            contacts: {
-                facebook: null,
-                website: null,
-                vk: null,
-                twitter: null,
-                instagram: null,
-                youtube: null,
-                github: null,
-                mainLink: null
-            },
-            lookingForAJob: false,
-            lookingForAJobDescription: null,
-            fullName: "Alexander",
-            userId: 2,
-            photos: {
-                small: null,
-                large: null
-            }
-        }
+      //   let defaultUserData = {
+      //       aboutMe: "учу реакт",
+      //       contacts: {
+      //           facebook: null,
+      //           website: null,
+      //           vk: null,
+      //           twitter: null,
+      //           instagram: null,
+      //           youtube: null,
+      //           github: null,
+      //           mainLink: null
+      //       },
+      //       lookingForAJob: false,
+      //       lookingForAJobDescription: null,
+      //       fullName: "Alexander",
+      //       userId: 2,
+      //       photos: {
+      //           small: null,
+      //           large: null
+      //       }
+      //   }
 
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 18732;
+            userId = this.props.authorizedUserId;
+            if (!userId) {
+               this.props.history.push('/login')
+            }
         }
 
         this.props.getUserProfile(userId);
@@ -42,6 +45,7 @@ class ProfileContainer extends React.Component {
     render() {
         return (
             <Profile {...this.props} 
+                userId={this.props.match.params.userId || this.props.authorizedUserId}
                 profile={this.props.profile} 
                 status={this.props.status}
                 updateUserStatus={this.props.updateUserStatus} />
@@ -51,7 +55,9 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuthorised
 });
 
 export default compose(

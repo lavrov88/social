@@ -3,9 +3,7 @@ import LoginForm from './Login';
 
 
 const LoginContainer = (props) => {
-    return <div>
-       <LoginForm />
-    </div>
+    return <LoginForm />
 }
 
 export default LoginContainer;

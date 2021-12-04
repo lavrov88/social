@@ -2,7 +2,6 @@ import React from 'react';
 import { clearNewStatusActionCreator, sendMessageActionCreator, updateMessageInputActionCreator } from '../../redux/messages-reducer';
 import Messages from './Messages';
 import {connect} from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
@@ -16,11 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onMessageTextChange: (text) => {
-            dispatch(updateMessageInputActionCreator(text))
-        },
-        onMessageSend: (messageInputItem) => {
-            dispatch(sendMessageActionCreator());
+        onMessageSend: (formData) => {
+            dispatch(sendMessageActionCreator(formData.messageText));
             setTimeout(() => {
                 dispatch(clearNewStatusActionCreator());
             }, 500);
