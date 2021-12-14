@@ -1,6 +1,5 @@
-const UPDATE_MESSAGE_INPUT = 'UPDATE-MESSAGE-INPUT';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const CLEAR_NEW_STATUS = 'CLEAR_NEW_STATUS';
+const SEND_MESSAGE = 'social/messages/SEND-MESSAGE';
+const CLEAR_NEW_STATUS = 'social/messages/CLEAR_NEW_STATUS';
 
 const initialState = {
     dialogs: [

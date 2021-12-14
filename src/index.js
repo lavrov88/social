@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import store from './redux/redux-store';
 import './index.css';
+//import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-    <React.StrictMode>
-        <App 
-            store={store} />
-    </React.StrictMode>,
-    document.getElementById('root')
+   <React.StrictMode>
+   <HashRouter>
+      <App 
+         store={store}
+      />
+   </HashRouter>
+   </React.StrictMode>,
+   document.getElementById('root')
     );

@@ -9,9 +9,9 @@ import { Redirect } from 'react-router-dom';
 
 
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-       <form onSubmit={props.handleSubmit}>
+       <form onSubmit={handleSubmit}>
           <div className={s.login_input}>
              <Field placeholder={"Email"} name={"email"} 
              component={Input} validate={[required]} />
@@ -28,7 +28,7 @@ const LoginForm = (props) => {
              <button>Login</button>
           </div>
           <div className={s.common_error}>
-             {props.error}
+             {error}
           </div>
        </form>
     )

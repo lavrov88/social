@@ -1,6 +1,6 @@
 import { getUserAuthData} from './auth-reducer.js';
 
-const SET_APP_INITIALIZE = 'SET_APP_INITIALIZE';
+const SET_APP_INITIALIZE = 'social/app/SET_APP_INITIALIZE';
 
 const initialState = {
     initialized: false

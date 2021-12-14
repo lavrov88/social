@@ -4,6 +4,7 @@ import s from './Header.module.css';
 import userProfileImage from '../../assets/images/user.png';
 
 const Header = (props) => {
+   debugger
     return (
         <header className={s.header}>
             <div className={s.header_logo}>
@@ -11,9 +12,9 @@ const Header = (props) => {
             </div>            
             <div className={s.header_auth}>
                 <div className={s.header_auth__avatar}>
-                    {props.authData.userImg === null
-                        ? <img src={userProfileImage} alt="" />
-                        : <img src={props.authData.userImg} alt="" /> }
+                    {!props.authData.userImg
+                        ? <img src={userProfileImage} alt="default img" />
+                        : <img src={props.authData.userImg} alt="user img" /> }
                 </div>
                 <div className={s.header_auth__username}>
                     {props.authData.isAuthorised === true
