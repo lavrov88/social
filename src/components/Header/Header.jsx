@@ -4,7 +4,6 @@ import s from './Header.module.css';
 import userProfileImage from '../../assets/images/user.png';
 
 const Header = (props) => {
-   debugger
     return (
         <header className={s.header}>
             <div className={s.header_logo}>
