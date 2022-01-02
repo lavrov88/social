@@ -73,13 +73,25 @@
     justify-content: space-between;
 }
 
+.user_item__name_and_status a {
+   text-decoration: none;
+   color: #113872;
+}
+
 .user_item__user_fullname {
+   margin: 20px 0 0;
+
     font-size: 18px;
     font-weight: 500;
 }
 
 .user_item__user_status {
+   width: fit-content;
+   padding: 10px 20px;
+   border-radius: 20px;
+
     font-size: 14px;
+    background-color: #bbd6ff;
 }
 
 .user_item__location {

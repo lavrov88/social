@@ -16,7 +16,6 @@
 .app_wrapper_content {
     position: relative;
     grid-area: content;
-    border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     overflow: hidden;
 

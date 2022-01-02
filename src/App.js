@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import MessagesContainer from './components/Messages/MessagesContainer';
-import {Route} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
@@ -27,27 +27,43 @@ class App extends Component {
       }
 
    return (
-         <Provider store={this.props.store}>
-            <div className="app_wrapper">
-               <HeaderContainer store={this.props.store} />
-               <NavbarContainer store={this.props.store} />
-               <div className="app_wrapper_content">
-                  <Route path='/profile/:userId?' 
-                        render={ () =>  <ProfileContainer store={this.props.store} />}/>
-                  <Route path='/messages' 
-                        render={ () =>  <MessagesContainer store={this.props.store}
-                  />}/>
-                  <Suspense fallback={<div>Loading...</div>}>
-                     <Route path='/news' render={ () =>  <News />}/>
-                     <Route path='/music' render={ () =>  <Music />}/>
-                     <Route path='/users' render={ () =>  <UsersContainer store={this.props.store} />}/>
-                     <Route path='/settings' render={ () =>  <Settings />}/>
-                  </Suspense>
-                  <Route path='/login' component={LoginContainer} />
-               </div>
+      <Provider store={this.props.store}>
+         <div className="app_wrapper">
+            <HeaderContainer store={this.props.store} />
+            <NavbarContainer store={this.props.store} />
+            <div className="app_wrapper_content">
+
+               <Redirect exact from="/" to="/profile" />
+
+               <Route path='/profile/:userId?' 
+                  render={ () =>  <ProfileContainer store={this.props.store} />}/>
+
+               <Route path='/messages' 
+                  render={ () =>  <MessagesContainer store={this.props.store} />}/>
+
+               <Suspense fallback={<div>Loading...</div>}>
+                  
+                  <Route path='/news' 
+                     render={ () =>  <News />}/>
+                  
+                  <Route path='/music' 
+                     render={ () =>  <Music />}/>
+                  
+                  <Route path='/users' 
+                     render={ () =>  <UsersContainer store={this.props.store} />}/>
+                  
+                  <Route path='/settings' 
+                     render={ () =>  <Settings />}/>
+
+               </Suspense>
+
+               <Route path='/login' 
+                     render={ () => <LoginContainer />} />
+
             </div>
-         </Provider>
-       );
+         </div>
+      </Provider>
+   );
    }
 }
 

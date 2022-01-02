@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../../Common/Button/Button';
 import s from './ProfileStatus.module.css';
 
 const ProfileStatusWithHooks = (props) => {
@@ -33,6 +34,7 @@ const ProfileStatusWithHooks = (props) => {
          {!editMode &&
             <div onDoubleClick={activateEditMode} className={s.profile__user_status}>
                <span>{props.status || '...'}</span>
+               {props.isOwner && <div className={s.profile__user_status__popup}>Double click to edit status</div>}
             </div>
          }
          {editMode &&
@@ -42,8 +44,8 @@ const ProfileStatusWithHooks = (props) => {
                   value={status}>
                </input>
                <div className={s.profile__user_status_btns}>
-                  <button onClick={sumbitNewStatus}>Update status</button>
-                  <button onClick={cancelEditStatus}>Cancel</button>
+                  <Button action={sumbitNewStatus} text='Update status' />
+                  <Button action={cancelEditStatus} type='danger' text='Cancel' />
                </div>
             </div>
          }

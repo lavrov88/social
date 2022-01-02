@@ -6,6 +6,7 @@ import { required } from '../../utils/validators/validators.js';
 import { Input } from '../Common/FormsControls/FormsControls.jsx';
 import s from './Login.module.css'
 import { Redirect } from 'react-router-dom';
+import Button from '../Common/Button/Button.jsx';
 
 
 
@@ -31,8 +32,8 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
             <Field placeholder={"Letters from image"} name={"captcha"} 
              component={Input} validate={[required]} />
           </div> }
-          <div>
-             <button>Login</button>
+          <div className={s.login_btn_div}>
+             <Button text="Login" submit />
           </div>
           <div className={s.common_error}>
              {error}

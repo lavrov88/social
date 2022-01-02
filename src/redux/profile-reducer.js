@@ -1,7 +1,8 @@
 import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
 
-const ADD_POST = 'ADD-POST';
+const ADD_POST = 'social/profile/ADD-POST';
+const TOGGLE_PROFILE_IS_LOADING = 'social/profile/TOGGLE_PROFILE_IS_LOADING';
 const SET_USER_PROFILE = 'social/profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'social/profile/SET_USER_STATUS';
 const SAVE_PHOTO_SUCCESS = 'social/profile/SAVE_PHOTO_SUCCESS';
@@ -21,6 +22,8 @@ const initialState = {
         {id: 2, date: '04.07.2021', title: 'Hey', text: 'How are you?', likesCount: 9},
         {id: 3, date: '06.07.2021', title: 'Hello', text: 'Hey hey hello!', likesCount: 10}
     ],
+
+    isLoading: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -52,9 +55,12 @@ const profileReducer = (state = initialState, action) => {
         }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
-        }        
+        }
         case SET_USER_STATUS: {
             return {...state, status: action.status}
+        }
+        case TOGGLE_PROFILE_IS_LOADING: {
+            return {...state, isLoading: action.isLoading}
         }
         case SAVE_PHOTO_SUCCESS: {
          return {...state, profile: {...state.profile, photos: action.photos}}
@@ -66,12 +72,15 @@ const profileReducer = (state = initialState, action) => {
 
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
+export const toggleProfileIsLoading = (isLoading) => ({type: TOGGLE_PROFILE_IS_LOADING, isLoading})
 export const addPostActionCreator = (data) => ({type: ADD_POST, title: data.newPostTitle, text: data.newPostText});
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 export const getUserProfile = (userId) => async (dispatch) => {
+   dispatch(toggleProfileIsLoading(true))
    let data = await profileAPI.getProfile(userId)
    dispatch(setUserProfile(data))
+   dispatch(toggleProfileIsLoading(false))
 }
 
 export const getUserStatus = (userId) => async (dispatch) => {

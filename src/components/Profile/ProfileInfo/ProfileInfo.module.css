@@ -18,17 +18,73 @@
     border-radius: 10%;
 }
 
-.profile_avatar__upload {
-   max-width: 120px;
-   overflow: hidden;
+.profile_avatar__upload label {
+   display: block;
+   width: 100px;
+   text-align: center;
+   font-size: 13px;
+   cursor: pointer;
+   padding: 3px 0px;
+   border-radius: 4px;
+
+   background-color: rgba(255, 255, 255, 0.6);
+}
+
+.profile_avatar__upload label:hover {
+   background-color: #fff;
+}
+
+.hide {
+   position: absolute;
+   width: 0;
+   height: 0;
+   z-index: -1;
+   opacity: 0;
 }
 
 .profile__username {
-    font-size: 18px;
+   padding: 0px 20px 13px;
+
+    font-size: 22px;
     font-weight: 600;
-    line-height: 2;
 }
 
-/* .contact_item {
+.profile_info {
+   margin-top: 20px;
+}
+
+.profile_info_items {
+   list-style-type: none;
+   padding: 0;
+}
+
+.profile_info_contacts {
+   list-style-type: none;
+   padding: 0;
    padding-left: 20px;
-} */
+}
+
+.profile_info_contacts a {
+   text-decoration: none;
+   color: #1640b3;
+}
+
+.profile_info_contacts a:hover {
+   text-decoration: underline;
+}
+
+.profile_edit li {
+   margin-top: 5px;
+}
+
+.profile_edit textarea, .profile_edit input {
+   padding: 5px 7px;
+}
+
+.profile_edit_confirm_btns {
+   margin-top: 10px;
+}
+
+.profile_edit_confirm_btns button {
+   margin-right: 10px;
+}

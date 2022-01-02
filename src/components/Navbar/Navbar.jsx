@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import userProfileImage from '../../assets/images/user.png';
-import { getUserProfile } from '../../redux/profile-reducer';
+import Preloader from '../Common/Preloader/Preloader';
 
 const Links = (props) => {
     const linksElements = props.links
@@ -24,34 +24,48 @@ const Links = (props) => {
     )
 }
 
-const Friends = (props) => {
+const LatestRegistered = (props) => {
 
-    const friendsElements = props.friends
-        .map(f => {
+   if (props.isLoading) {
+      return (
+         <Preloader height='200' />
+      )
+   }
+
+    const usersElements = props.users
+        .map(u => {
             return (
-                <li key={f.id} className={s.nav_friend_item}>
-                    <div className={s.nav_friend_avatar}>
-                        <img src={userProfileImage} alt="" />
-                    </div>
-                    <div>
-                        {f.name}
-                    </div>
+                <li key={u.id + '_navbar'}>
+                   <NavLink to={'/profile/' + u.id} className={s.nav_latest_user_item} >
+                     <div className={s.nav_latest_user_avatar}>
+                           <img src={userProfileImage} alt="" />
+                     </div>
+                     <div className={s.nav_latest_user_name}>
+                           {u.name}
+                     </div>
+                    </NavLink>
                 </li>
             )
-        });
+        })
 
-    return (        
-        <ul className={s.nav_friends}>
-            {friendsElements}
-        </ul>
-    )
+   return (
+      <div>
+         <ul className={s.nav_latest_users}>
+            {usersElements}
+         </ul>
+      </div>
+
+   )
 }
 
 const Navbar = (props) => {
     return (
         <nav className={s.nav}>
             <Links links={props.links} />
-            <Friends friends={props.friends} />
+            <div className={s.latest_registered_wrapper}>
+               <h3 onClick={props.loadNewUsers}>Latest registered:</h3>
+               <LatestRegistered users={props.users} loadNewUsers={props.loadNewUsers} isLoading={props.isLoading} />
+            </div>
         </nav>
     )
 }

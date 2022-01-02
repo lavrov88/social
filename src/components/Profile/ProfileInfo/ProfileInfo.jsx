@@ -5,28 +5,43 @@ import Preloader from '../../Common/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import ProfileInfoEdit from './ProfileInfoEdit';
 import { useState } from 'react';
+import Button from '../../Common/Button/Button';
 
 const ProfileInfoList = (props) => {
+   const contactsData = [
+      { name: 'Facebook', source: props.profile.contacts.facebook },
+      { name: 'Website', source: props.profile.contacts.website },
+      { name: 'VK', source: props.profile.contacts.vk },
+      { name: 'Twitter', source: props.profile.contacts.twitter },
+      { name: 'Instagram', source: props.profile.contacts.instagram },
+      { name: 'Youtube', source: props.profile.contacts.youtube },
+      { name: 'Github', source: props.profile.contacts.github },
+   ]
+   const contactsItems = []
+   const ContactItem = ({name, source}) => {
+      return <li className={s.contact_item}> <b>{name}: </b><a target='_blank' rel="noreferrer" href={'http://' + source}>{source} </a></li>
+   }
+
+   contactsData.forEach(contact => {
+      if (contact.source) {
+         contactsItems.push(<ContactItem name={contact.name}  key={contact.name} source={contact.source} />)
+      }
+   })
+
    return (
-      <div>
+      <div className={s.profile_info}>
          <div>
-            {props.isOwner && <button className={s.profile_edit_btn} onClick={props.activateEditMode}>Edit profile</button>}
+            {props.isOwner && <Button action={props.activateEditMode} type="normal" text="Edit profile" />}
          </div>
-         <ul>
+         <ul className={s.profile_info_items}>
             <li><b>About me:</b> {props.profile.aboutMe}</li>
             <li><b>Looking for a job:</b> {props.profile.lookingForAJob === true ? 'yes' : 'no'}</li>
             <li><b>Looking for a job desctription:</b> {props.profile.lookingForAJobDescription || ''}</li>
             <p></p>
             <li>
                <b>My contacts:</b>
-               <ul>
-                  <li className={s.contact_item}><b>Facebook:</b> {props.profile.contacts.facebook || ''}</li>
-                  <li className={s.contact_item}><b>Website:</b> {props.profile.contacts.website || ''}</li>
-                  <li className={s.contact_item}><b>VK:</b> {props.profile.contacts.vk || ''}</li>
-                  <li className={s.contact_item}><b>Twitter:</b> {props.profile.contacts.twitter || ''}</li>
-                  <li className={s.contact_item}><b>Instagram:</b> {props.profile.contacts.instagram || ''}</li>
-                  <li className={s.contact_item}><b>Youtube:</b> {props.profile.contacts.youtube || ''}</li>
-                  <li className={s.contact_item}><b>Github:</b> {props.profile.contacts.github || ''}</li>
+               <ul className={s.profile_info_contacts}>
+                  {contactsItems}
                </ul>
             </li>
          </ul>
@@ -35,7 +50,6 @@ const ProfileInfoList = (props) => {
 }
 
 const ProfileInfo = (props) => {
-
    let [editProfile, setEditProfile] = useState(false)
    
    const activateEditMode = () => {
@@ -61,12 +75,23 @@ const ProfileInfo = (props) => {
          .then( () => deactivateEditMode())
     }
 
+    if (props.isLoading) {
+       return (
+          <Preloader />
+       )
+    }
+
     return (
         <div className={s.profile_container}>
             <div className={s.profile_avatar}>
                 <img src={props.profile.photos.small || userProfileImage} alt="" />
                 <div className={s.profile_avatar__upload}>
-                  { props.isOwner && <input type="file" onChange={onAvatarImgSelected} />}
+                  { props.isOwner && <div>
+                     <input type="file" onChange={onAvatarImgSelected} id="photo_upload" className={s.hide} />
+                     <label htmlFor="photo_upload">
+                        Change photo
+                     </label>
+                  </div> }
                 </div>
             </div>
             <div className={s.profile_description}>
@@ -78,8 +103,8 @@ const ProfileInfo = (props) => {
                 />
                 <div className={s.profile__user_info}>
                     {editProfile
-                     ? <ProfileInfoEdit initialValues={props.profile} onSubmit={onSubmit} deactivateEditMode={deactivateEditMode}/>
-                     : <ProfileInfoList profile={props.profile} isOwner={props.isOwner} activateEditMode={activateEditMode}/>
+                     ? <ProfileInfoEdit initialValues={props.profile} onSubmit={onSubmit} deactivateEditMode={deactivateEditMode} />
+                     : <ProfileInfoList profile={props.profile} isOwner={props.isOwner} activateEditMode={activateEditMode} />
                     }
                 </div>
             </div>

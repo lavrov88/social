@@ -64,11 +64,7 @@ const UserItem = ({ user, follow, unfollow, followingInProgress }) => {
                <NavLink to={'/profile/' + user.id}>
                   <p className={s.user_item__user_fullname}>{user.name}</p>
                </NavLink>
-               <p className={s.user_item__user_status}>{user.status}</p>
-            </div>
-            <div className={s.user_item__location}>
-               <p className={s.user_item__country}>{"u.location.country"},</p>
-               <p className={s.user_item__city}>{"u.location.country"}</p>
+               {user.status && <p className={s.user_item__user_status}>{user.status}</p> }
             </div>
          </div>
       </div>
@@ -93,6 +89,7 @@ const Users = (props) => {
                 {
                     props.users.map(u => (
                         <UserItem 
+                           key={u.id}
                            user={u}
                            follow={props.follow}
                            unfollow={props.unfollow}

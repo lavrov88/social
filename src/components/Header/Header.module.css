@@ -9,6 +9,8 @@
     background-color:#4489f0;
     color: #fff;
     border-radius: 20px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .header_logo {
@@ -38,8 +40,15 @@
     padding-right: 10px;
 }
 
+.avatar_auth img {
+   margin-top: 5px;
+}
+
+.avatar_non_auth img {
+   margin-top: 50%;
+}
+
 .header_auth__avatar img {
-    margin-top: 50%;
     max-height: 50%;
     border-radius: 10%;
 }
@@ -52,11 +61,28 @@
     text-align: right;
 }
 
-.header_auth__username a {
-    color: #fff;
-    text-decoration: none;
-}
-
 .header_auth__username p {
     margin: 0;
+}
+
+.header_auth__username button {
+   margin-top: 5px;
+   margin-left: auto;
+}
+
+.btn_white {
+   display: inline;
+   margin: 0px;
+   border: none;
+   border-radius: 5px;
+   padding: 5px 15px;
+
+   background-color: #aacdfc;
+   color: #292929;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+.btn_white:hover {
+   background-color: #9bafc9;
 }

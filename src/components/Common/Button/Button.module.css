@@ -1,0 +1,35 @@
+.btn_normal, .btn_danger, .btn_white {
+   display: inline;
+   margin: 0px;
+   border: none;
+   border-radius: 5px;
+   padding: 6px 12px;
+
+   background-color: #1640b3;
+   color: #fff;
+   cursor: pointer;
+}
+
+.btn_normal:hover {
+   background-color: #2d5fe7;
+}
+
+.btn_danger {
+   background-color: #ac0025;
+}
+
+.btn_danger:hover {
+   background-color: #dd1212;
+}
+
+.btn_white {
+   background-color: #92c1ff;
+}
+
+.btn_white:hover {
+   background-color: #7a9cc9;
+}
+
+.btn_normal:disabled, .btn_danger:disabled {
+   background-color: #999ead;
+}

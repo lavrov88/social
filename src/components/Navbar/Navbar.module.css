@@ -1,68 +1,81 @@
 .nav {
-    grid-area: nav;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    padding: 0px 15px;
-    margin-left: 0;
+   grid-area: nav;
+   border-bottom-left-radius: 20px;
+   padding: 0px 15px 20px;
+   margin-left: 0;
 
-    background-color: #4489f0;
-    color: #fff;
-    font-size: 20px;
-    line-height: 1.8;
+   background-color: #4489f0;
+   color: #fff;
+   font-size: 20px;
+   line-height: 1.8;
 }
 
 .nav ul {
-    padding: 0;
+   padding: 0;
 }
 
 .nav_li_item {
-    list-style-type: none;
-    padding-left: 10px;
-    margin: 0;
+   list-style-type: none;
+   padding-left: 10px;
+   margin: 0;
 }
 
 .nav_li_item:last-child {
-    border-bottom: #fff 1px solid;
-    padding-bottom: 20px;
+   border-bottom: #fff 1px solid;
+   padding-bottom: 20px;
 }
 
 .nav_item {
-    color: #fff;
-    text-decoration: none;
+   color: #fff;
+   text-decoration: none;
 }
 
 .nav_item.active {
-    font-weight: 700;
-    color: #ffac3e;
+   font-weight: 700;
+   color: #ffac3e;
 }
 
-.nav_friends {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 30px;
-    padding: 10px;
+.nav h3 {
+   margin: 0;
 
-    list-style: none;
+   font-size: 15px;
+   font-weight: 500;
 }
 
-.nav_friend_item {
-    margin: 0 5px;
-    line-height: 2;
-    flex-basis: 33%;
-
-    font-size: 14px;
-    text-align: center;
+.latest_registered_wrapper {
+   position: relative;
 }
 
-.nav_friend_avatar {
-    margin: 0 auto;
+.nav_latest_users {
+   justify-content: space-between;
+   width: 100%;
+   margin: 0;
+   padding: 10px;
+
+   list-style: none;
 }
 
-.nav_friend_avatar img {
-    margin: 0 auto;
-    display: block;
-    width: 40px;
 
-    border-radius: 5px;
+.nav_latest_user_item {
+   display: flex;
+   margin: 10px 0px;
+
+   font-size: 14px;
+   text-align: center;
+   color: #fff;
+   text-decoration: none;
+}
+
+.nav_latest_user_avatar img {
+   margin: 0 auto;
+   display: block;
+   width: 40px;
+
+   border-radius: 5px;
+}
+
+.nav_latest_user_name {
+   display: flex;
+   align-items: center;
+   margin-left: 10px;
 }

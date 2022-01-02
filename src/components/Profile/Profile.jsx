@@ -16,6 +16,7 @@ const Profile = (props) => {
                <ProfileInfo 
                   profile={props.profile}
                   isOwner={props.isOwner}
+                  isLoading={props.isLoading}
                   saveProfile={props.saveProfile}
                   savePhoto={props.savePhoto}
                   status={props.status}

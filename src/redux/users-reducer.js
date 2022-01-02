@@ -76,7 +76,7 @@ export const requestUsers = (currentPage, pageSize) => {
 const followUnfollowThunk = async (follow, dispatch, userId) => {
    dispatch(toggleFollowingProgress(true, userId))
    let data
-   follow === true 
+   follow === true
       ? data = await usersAPI.followUser(userId)
       : data = await usersAPI.unfollowUser(userId)
    
@@ -91,26 +91,12 @@ const followUnfollowThunk = async (follow, dispatch, userId) => {
 export const follow = (userId) => {
    return async (dispatch) => {
       followUnfollowThunk(true, dispatch, userId)
-
-      // dispatch(toggleFollowingProgress(true, userId));
-      // let data = await usersAPI.followUser(userId)
-      // if (data.resultCode === 0) {
-      //    dispatch(followSucces(userId))
-      // }
-      // dispatch(toggleFollowingProgress(false, userId))
    }
 }
 
 export const unfollow = (userId) => {
    return async (dispatch) => {
       followUnfollowThunk(false, dispatch, userId)
-
-      // dispatch(toggleFollowingProgress(true, userId))
-      // let data = await usersAPI.unfollowUser(userId)
-      // if (data.resultCode === 0) {
-      //    dispatch(unfollowSucces(userId))
-      // }
-      // dispatch(toggleFollowingProgress(false, userId))
    }
 }
 

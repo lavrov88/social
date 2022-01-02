@@ -41,7 +41,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setUserAuth = (userId, email, login, isAuthorised) => ({type: SET_USER_AUTH, payload: {userId, email, login, isAuthorised}})
-export const setUserImg = (link) => ({type: SET_USER_IMG, data: link})
+export const setUserImg = (link) => ({type: SET_USER_IMG, link: link})
 export const setCaptchaUrl = (captchaUrl) => ({type: SET_CAPTCHA_URL, captchaUrl: captchaUrl})
 
 export const getUserAuthData = () => async (dispatch) => {
@@ -53,12 +53,14 @@ export const getUserAuthData = () => async (dispatch) => {
       currentUserId = id
       dispatch(setUserAuth(id, email, login, true))
    }
-
+   
    if (currentUserId !== null) {
       profileAPI.getProfile(currentUserId)
          .then(data => {
                dispatch(setUserImg(data.photos.small))
          })
+   } else {
+      dispatch(setUserImg(null))
    }
 }
 
@@ -78,7 +80,8 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch) 
 export const logout = () => async (dispatch) => {
    let data = await authAPI.logout()
    if (data.resultCode === 0) {
-      dispatch(setUserAuth(null, null, null, false));
+      dispatch(setUserAuth(null, null, null, false))
+      dispatch(getUserAuthData())
    }
 }
 
