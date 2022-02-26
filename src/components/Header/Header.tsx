@@ -3,8 +3,13 @@ import { NavLink } from 'react-router-dom';
 import s from './Header.module.css';
 import userProfileImage from '../../assets/images/user.png';
 import Button from '../Common/Button/Button';
+import { AuthInitialStateType } from '../../redux/auth-reducer';
 
-const Header = (props) => {
+type PropsType = {
+   authData: AuthInitialStateType
+   logout: () => void
+}
+const Header: React.FC<PropsType> = (props) => {
    let auth = props.authData.isAuthorised
     return (
         <header className={s.header}>

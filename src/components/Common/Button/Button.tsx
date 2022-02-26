@@ -1,7 +1,14 @@
 import React from "react";
 import s from "./Button.module.css"
 
-const Button = ({type, text, action, submit}) => {
+type PropsType = {
+   type?: string
+   text: string
+   action?: () => void
+   submit?: boolean
+}
+
+const Button: React.FC<PropsType> = ({type, text, action, submit}) => {
    let style
    if (type === 'normal' || !type) {
       style = s.btn_normal

@@ -65,7 +65,7 @@ const Messages = (props) => {
     };
 
     let dialogsItems = props.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />);
-    let messagesItems = props.messages.map(m => <MessageItem key={m.key} type={classForType(m.type)} text={m.text} new={m.new} />);
+    let messagesItems = props.messages.map(m => <MessageItem key={m.id} type={classForType(m.type)} text={m.text} new={m.new} />);
 
     const onMessageSend = (formData) => {
        props.onMessageSend(formData)

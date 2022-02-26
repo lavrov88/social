@@ -1,12 +1,20 @@
 import { stopSubmit } from "redux-form";
 import { authAPI, profileAPI, securityAPI } from "../api/api";
 
-const SET_USER_AUTH = 'social/auth/SET_USER_AUTH';
-const SET_USER_IMG = 'social/auth/SET_USER_IMG';
-const SET_CAPTCHA_URL = 'social/auth/SET_CAPTCHA_URL';
+const SET_USER_AUTH = 'social/auth/SET_USER_AUTH'
+const SET_USER_IMG = 'social/auth/SET_USER_IMG'
+const SET_CAPTCHA_URL = 'social/auth/SET_CAPTCHA_URL'
 
+export type AuthInitialStateType = {
+   userId: number | null
+   login: string | null
+   email: string | null
+   isAuthorised: boolean
+   userImg: string | null
+   captchaUrl: string | null
+}
 
-const initialState = {
+const initialState: AuthInitialStateType = {
     userId: null,
     login: null,
     email: null,
@@ -15,7 +23,7 @@ const initialState = {
     captchaUrl: null
 };
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action: any): AuthInitialStateType => {
     switch (action.type) {
         case SET_USER_AUTH:
             return {
@@ -40,11 +48,21 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserAuth = (userId, email, login, isAuthorised) => ({type: SET_USER_AUTH, payload: {userId, email, login, isAuthorised}})
-export const setUserImg = (link) => ({type: SET_USER_IMG, link: link})
-export const setCaptchaUrl = (captchaUrl) => ({type: SET_CAPTCHA_URL, captchaUrl: captchaUrl})
+type SetUserAuthActionType = {
+   type: typeof SET_USER_AUTH
+   payload: {
+      userId: number | null
+      email: string | null
+      login: string | null
+      isAuthorised: boolean
+   }
+}
 
-export const getUserAuthData = () => async (dispatch) => {
+export const setUserAuth = (userId: number | null, email: string | null, login: string | null, isAuthorised: boolean): SetUserAuthActionType => ({type: SET_USER_AUTH, payload: {userId, email, login, isAuthorised}})
+export const setUserImg = (link: string | null) => ({type: SET_USER_IMG, link: link})
+export const setCaptchaUrl = (captchaUrl: string) => ({type: SET_CAPTCHA_URL, captchaUrl: captchaUrl})
+
+export const getUserAuthData = () => async (dispatch: any) => {
    let currentUserId = null
    let data = await authAPI.checkAuth()
 
@@ -56,15 +74,19 @@ export const getUserAuthData = () => async (dispatch) => {
    
    if (currentUserId !== null) {
       profileAPI.getProfile(currentUserId)
-         .then(data => {
-               dispatch(setUserImg(data.photos.small))
+         .then((data: any) => {
+               if (data) {
+                  dispatch(setUserImg(data.photos.small))
+               } else {
+                  dispatch(setUserImg(null))
+               }
          })
    } else {
       dispatch(setUserImg(null))
    }
 }
 
-export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
    let data = await authAPI.login(email, password, rememberMe, captcha)
    if (data.resultCode === 0) {
       dispatch(getUserAuthData());
@@ -77,7 +99,7 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch) 
    }
 }
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: any) => {
    let data = await authAPI.logout()
    if (data.resultCode === 0) {
       dispatch(setUserAuth(null, null, null, false))
@@ -85,9 +107,9 @@ export const logout = () => async (dispatch) => {
    }
 }
 
-export const getCaptchaUrl = () => async (dispatch) => {
+export const getCaptchaUrl = () => async (dispatch: any) => {
    let captchaUrl = await securityAPI.getCaptchaUrl()
       dispatch(setCaptchaUrl(captchaUrl.url))
 }
 
-export default authReducer;
+export default authReducer

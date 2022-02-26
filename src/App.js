@@ -8,7 +8,7 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import { connect, Provider } from 'react-redux';
 import { Component } from 'react';
-import { initializeApp } from './redux/app-reducer.js'
+import { initializeApp } from './redux/app-reducer.ts'
 import Preloader from './components/Common/Preloader/Preloader';
 import { Suspense } from 'react';
 
@@ -29,36 +29,38 @@ class App extends Component {
    return (
       <Provider store={this.props.store}>
          <div className="app_wrapper">
-            <HeaderContainer store={this.props.store} />
+            <HeaderContainer />
             <NavbarContainer store={this.props.store} />
             <div className="app_wrapper_content">
 
-               <Redirect exact from="/" to="/profile" />
+                  <Redirect exact from="/" to="/profile" />
+                  <Redirect exact from="/messages" to="/messages/1" />
 
-               <Route path='/profile/:userId?' 
-                  render={ () =>  <ProfileContainer store={this.props.store} />}/>
+                  <Route path='/profile/:userId?' 
+                     render={ () =>  <ProfileContainer store={this.props.store} />}/>
 
-               <Route path='/messages' 
-                  render={ () =>  <MessagesContainer store={this.props.store} />}/>
+                  <Route path='/messages' 
+                     render={ () =>  <MessagesContainer store={this.props.store} />}/>
 
-               <Suspense fallback={<div>Loading...</div>}>
-                  
-                  <Route path='/news' 
-                     render={ () =>  <News />}/>
-                  
-                  <Route path='/music' 
-                     render={ () =>  <Music />}/>
-                  
-                  <Route path='/users' 
-                     render={ () =>  <UsersContainer store={this.props.store} />}/>
-                  
-                  <Route path='/settings' 
-                     render={ () =>  <Settings />}/>
+                  <Suspense fallback={<div>Loading...</div>}>
+                     
+                     <Route path='/news' 
+                        render={ () =>  <News />}/>
+                     
+                     <Route path='/music' 
+                        render={ () =>  <Music />}/>
+                     
+                     <Route path='/users' 
+                        render={ () =>  <UsersContainer pageTitle='All users' />}/>
+                     
+                     <Route path='/settings' 
+                        render={ () =>  <Settings />}/>
 
-               </Suspense>
+                  </Suspense>
 
-               <Route path='/login' 
-                     render={ () => <LoginContainer />} />
+                  <Route path='/login' 
+                        component={LoginContainer}
+                         />
 
             </div>
          </div>

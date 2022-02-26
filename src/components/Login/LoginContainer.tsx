@@ -1,8 +1,7 @@
 import React from 'react';
 import LoginForm from './Login';
 
-
-const LoginContainer = (props) => {
+const LoginContainer = () => {
     return <LoginForm />
 }
 

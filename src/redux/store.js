@@ -23,9 +23,8 @@ let store = {
             dialogs: [
                 {id: 1, name: 'Вася'},
                 {id: 2, name: 'Петя'},
-                {id: 3, name: 'Джибраил'},
+                {id: 3, name: 'Миша'},
                 {id: 4, name: 'Таня'},
-                {id: 5, name: 'Миша'},
             ],
         
             messages: [
@@ -51,7 +50,7 @@ let store = {
             friends: [
                 {id: 1, name: 'Вася'},
                 {id: 2, name: 'Петя'},
-                {id: 3, name: 'Джибраил'},
+                {id: 3, name: 'Миша'},
             ]
         }
     },

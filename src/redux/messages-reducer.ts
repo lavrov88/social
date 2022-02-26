@@ -1,27 +1,39 @@
 const SEND_MESSAGE = 'social/messages/SEND-MESSAGE';
 const CLEAR_NEW_STATUS = 'social/messages/CLEAR_NEW_STATUS';
 
+type DialogObjectType = {
+   id : number
+   name: string
+}
+type MessageObjectType = {
+   id : number
+   type: string
+   text: string
+   new: boolean
+}
+
 const initialState = {
     dialogs: [
         {id: 1, name: 'Вася'},
         {id: 2, name: 'Петя'},
-        {id: 3, name: 'Джибраил'},
+        {id: 3, name: 'Миша'},
         {id: 4, name: 'Таня'},
-        {id: 5, name: 'Миша'},
-    ],
+    ] as Array<DialogObjectType>,
 
     messages: [
         {id: 1, type: 'in', text: 'Привет', new: false},
         {id: 2, type: 'in', text: 'Как сам?', new: false},
         {id: 3, type: 'out', text: 'Привет', new: false},
-        {id: 4, type: 'out', text: 'Да нормально', new: false},
-        {id: 5, type: 'in', text: 'Ништяк', new: false},
-    ],
+        {id: 4, type: 'out', text: 'Всё нормально', new: false},
+        {id: 5, type: 'in', text: 'Ну и отлично!', new: false},
+    ] as Array<MessageObjectType>,
 
     newMessageInput: ''
-};
+}
 
-const messageReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const messageReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE: {
             let newMessage = {
@@ -52,6 +64,14 @@ const messageReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageActionCreator = (text) => ({type: SEND_MESSAGE, text: text});
-export const clearNewStatusActionCreator = () => ({type: CLEAR_NEW_STATUS})
+type SendMessageActionType = {
+   type: typeof SEND_MESSAGE
+   text: string
+}
+type ClearNewStatusActionType = {
+   type: typeof CLEAR_NEW_STATUS
+}
+
+export const sendMessageActionCreator = (text: string): SendMessageActionType => ({type: SEND_MESSAGE, text: text});
+export const clearNewStatusActionCreator = (): ClearNewStatusActionType => ({type: CLEAR_NEW_STATUS})
 export default messageReducer;

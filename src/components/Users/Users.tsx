@@ -2,40 +2,17 @@ import React from 'react';
 import s from './Users.module.css';
 import userProfileImage from '../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
+import Paginator from '../Common/Paginator/Paginator';
+import { UserType } from '../../types/types';
 
-const Paginator = ({pages, currentPage, onPageChanged, pagesCount}) => {
-   const BeginButton = () => {
-      if (currentPage > 1) {return (
-          <span onClick={() => onPageChanged(1)} className={s.users__pagination_item}>{`<<`}</span>
-      )} else {return null}
-  }
-  const EndButton = () => {
-      if (currentPage < pagesCount) {return (
-          <span onClick={() => onPageChanged(pagesCount)} className={s.users__pagination_item}>{`>>`}</span>
-      )} else {return null}
-  }
-  
-   return (
-      <div className={s.users__pagination}>
-         {<BeginButton />}
-         {pages.map(p => {
-            if (currentPage - p > 5 || currentPage - p < -5) {
-               return '';
-            }
-            return (
-               <span
-                  key={p}
-                  onClick={() => onPageChanged(p)}
-                  className={`${s.users__pagination_item} ${currentPage === p ? s.active : ''}`}
-               >{p}</span>
-            )
-         })}
-         {<EndButton />}
-      </div>
-   )
+type UserItemPropsType = {
+   authorised: boolean
+   user: UserType
+   follow: (userId: number) => void
+   unfollow: (userId: number) => void
+   followingInProgress: Array<number>
 }
-
-const UserItem = ({ user, follow, unfollow, followingInProgress }) => {
+const UserItem: React.FC<UserItemPropsType> = ({ authorised, user, follow, unfollow, followingInProgress }) => {
    return (
       <div key={user.id} className={s.user_item}>
          <div className={s.user_item__left}>
@@ -53,7 +30,7 @@ const UserItem = ({ user, follow, unfollow, followingInProgress }) => {
                >Unfollow</button>
 
                : <button
-                  disabled={followingInProgress.some(id => id === user.id)}
+                  disabled={followingInProgress.some(id => id === user.id) || !authorised}
                   onClick={() => { follow(user.id) }}
                   className={s.user_item__follow_btn}
                >Follow</button>}
@@ -71,7 +48,18 @@ const UserItem = ({ user, follow, unfollow, followingInProgress }) => {
    )
 }
 
-const Users = (props) => {
+type UsersPropsType = {
+   authorised: boolean
+   totalUsersCount: number
+   pageSize: number
+   currentPage: number
+   onPageChanged: (newPage: number) => void
+   users: Array<UserType>
+   follow: (userId: number) => void
+   unfollow: (userId: number) => void
+   followingInProgress: Array<number>
+}
+const Users: React.FC<UsersPropsType> = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -79,16 +67,20 @@ const Users = (props) => {
     }
     return (
         <div className={s.users_wrapper}>
-             <Paginator 
+             <Paginator
                pages={pages}
                currentPage={props.currentPage}
                onPageChanged={props.onPageChanged}
                pagesCount={pagesCount}
+               paginationItemStyle={s.users__pagination_item}
+               paginationDivStyle={s.users__pagination}
+               activeItemStyle={s.active}
             />
             <div className={s.users_list}>
                 {
                     props.users.map(u => (
                         <UserItem 
+                           authorised={props.authorised}
                            key={u.id}
                            user={u}
                            follow={props.follow}

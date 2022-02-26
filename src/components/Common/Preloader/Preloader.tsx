@@ -2,7 +2,10 @@ import React from 'react';
 import s from './Preloader.module.css';
 import preloaderImg from './tail-spin.svg'
 
-const Preloader = ({height}) => {
+type PropsType = {
+   height?: string
+}
+const Preloader: React.FC<PropsType> = ({height}) => {
 
    let heightValue
    if (!height) {
