@@ -6,12 +6,13 @@ import './index.css';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-   <React.StrictMode>
+   // <React.StrictMode>
    <HashRouter>
       <App 
          store={store}
       />
    </HashRouter>
-   </React.StrictMode>,
+   // </React.StrictMode>
+   ,
    document.getElementById('root')
     );

@@ -1,17 +1,13 @@
-import { Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
 import { getUserAuthData} from './auth-reducer';
-import { AppStateType } from './redux-store';
 
 const SET_APP_INITIALIZE = 'social/app/SET_APP_INITIALIZE';
 
-type InitialStateType = {
-   initialized: boolean
-}
 
-const initialState: InitialStateType = {
+const initialState = {
    initialized: false
 }
+
+type InitialStateType = typeof initialState
 
 const appReducer = (state = initialState, action: InitializeSuccededActionType): InitialStateType => {
     switch (action.type) {

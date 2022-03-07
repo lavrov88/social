@@ -1,6 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
-import { PhotosType, ProfileType } from "../types/types";
+import { DataPhotosType, PhotosType, ProfileType } from "../types/types";
 
 const ADD_POST = 'social/profile/ADD-POST'
 const TOGGLE_PROFILE_IS_LOADING = 'social/profile/TOGGLE_PROFILE_IS_LOADING'
@@ -111,14 +111,16 @@ type PostDataObjectType = {
 export const addPostActionCreator = (data: PostDataObjectType): AddPostActionType => ({type: ADD_POST, title: data.newPostTitle, text: data.newPostText})
 type SavePhotoSuccessActionType = {
    type: typeof SAVE_PHOTO_SUCCESS
-   photos: PhotosType
+   photos: DataPhotosType
 }
-export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos})
+export const savePhotoSuccess = (photos: DataPhotosType): SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos})
 
 export const getUserProfile = (userId: number) => async (dispatch: any) => {
    dispatch(toggleProfileIsLoading(true))
    let data = await profileAPI.getProfile(userId)
-   dispatch(setUserProfile(data))
+   if (data) {
+      dispatch(setUserProfile(data))
+   }
    dispatch(toggleProfileIsLoading(false))
 }
 
@@ -137,7 +139,7 @@ export const updateUserStatus = (status: string) => async (dispatch: any) => {
 export const savePhoto = (file: any) => async (dispatch: any) => {
    let response = await profileAPI.savePhoto(file)
    if (response.resultCode === 0) {
-      dispatch(savePhotoSuccess(response.data.photos))
+      dispatch(savePhotoSuccess(response.data))
    }
 }
 

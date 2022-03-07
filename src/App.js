@@ -33,8 +33,8 @@ class App extends Component {
             <NavbarContainer store={this.props.store} />
             <div className="app_wrapper_content">
 
+                  {/* <Redirect exact from="/messages" to="/messages/1" /> */}
                   <Redirect exact from="/" to="/profile" />
-                  <Redirect exact from="/messages" to="/messages/1" />
 
                   <Route path='/profile/:userId?' 
                      render={ () =>  <ProfileContainer store={this.props.store} />}/>

@@ -1,20 +1,24 @@
 import React from 'react';
 import s from './Messages.module.css';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Textarea } from '../Common/FormsControls/FormsControls';
 import { maxLengthCreator, required } from '../../utils/validators/validators';
 
 const DialogItem = (props) => {
     let path = '/messages/' + props.id;
+    const onDialogClicked = () => {
+      props.onDialogClicked(props.id)
+    }
 
     return (
         <div className={s.dialog_item}>
-            <NavLink
+            <Link
                 to={path}
-                activeClassName={s.active}>
+                onClick={onDialogClicked}
+                className={(props.lastOpenedDialog === props.id) ? s.active : undefined}>
                 {props.name}
-            </NavLink>
+            </Link>
         </div>
     )
 }
@@ -36,15 +40,19 @@ const MessageItem = (props) => {
     )
 }
 
-const maxLength10 = maxLengthCreator(10)
+const maxLength100 = maxLengthCreator(100)
 
 const NewMessageForm = (props) => {
    return (
       <div className={s.send_message}>
          <form onSubmit={props.handleSubmit}>
             <Field component={Textarea} name="messageText"
-               validate={[required, maxLength10]} placeholder="Message's text" />
-            <button>Send</button>
+               validate={[required, maxLength100]} placeholder="Message's text" />
+            <button type="submit" onClick={() => setTimeout(() => {
+               if (props.valid) {
+                  props.reset()
+               }
+            }, 10)}>Send</button>
          </form>
       </div>
    )
@@ -64,7 +72,7 @@ const Messages = (props) => {
         }
     };
 
-    let dialogsItems = props.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} />);
+    let dialogsItems = props.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name} lastOpenedDialog={props.lastOpenedDialog} onDialogClicked={props.onDialogClicked} />);
     let messagesItems = props.messages.map(m => <MessageItem key={m.id} type={classForType(m.type)} text={m.text} new={m.new} />);
 
     const onMessageSend = (formData) => {

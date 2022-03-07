@@ -57,7 +57,11 @@ export const refreshLatestUsers = () => {
       }
       catch(e) {
          console.log(e)
-         data = {items: [{id: 1, name: 'no data'}, {id: 2, name: 'no data'}, {id: 3, name: 'no data'},]}
+         data = {items: [
+            {id: 1, name: 'no data', photos: {small: null, large: null}}, 
+            {id: 2, name: 'no data', photos: {small: null, large: null}}, 
+            {id: 3, name: 'no data', photos: {small: null, large: null}},
+         ]}
       }
       dispatch(setLatestUsers(data.items))
       dispatch(toggleUsersIsLoading(false))

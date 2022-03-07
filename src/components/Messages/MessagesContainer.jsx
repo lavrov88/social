@@ -1,5 +1,5 @@
 import React from 'react';
-import { clearNewStatusActionCreator, sendMessageActionCreator, updateMessageInputActionCreator } from '../../redux/messages-reducer';
+import { clearNewStatusActionCreator, sendMessageActionCreator, changeLastOpenedDialog } from '../../redux/messages-reducer';
 import Messages from './Messages';
 import {connect} from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
     return {
         dialogs: state.messagesPage.dialogs,
         messages: state.messagesPage.messages,
-        newMessageInput: state.messagesPage.newMessageInput
+        newMessageInput: state.messagesPage.newMessageInput,
+        lastOpenedDialog: state.messagesPage.lastOpenedDialog
     }
 }
 
@@ -20,6 +21,9 @@ const mapDispatchToProps = (dispatch) => {
             setTimeout(() => {
                 dispatch(clearNewStatusActionCreator());
             }, 500);
+        },
+        onDialogClicked: (dialogId) => {
+           dispatch(changeLastOpenedDialog(dialogId))
         }
     }
 }

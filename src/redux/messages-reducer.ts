@@ -1,5 +1,6 @@
 const SEND_MESSAGE = 'social/messages/SEND-MESSAGE';
 const CLEAR_NEW_STATUS = 'social/messages/CLEAR_NEW_STATUS';
+const CHANGE_LAST_OPENED_DIALOG = 'social/messages/CHANGE_LAST_OPENED_DIALOG';
 
 type DialogObjectType = {
    id : number
@@ -28,7 +29,8 @@ const initialState = {
         {id: 5, type: 'in', text: 'Ну и отлично!', new: false},
     ] as Array<MessageObjectType>,
 
-    newMessageInput: ''
+    newMessageInput: '',
+    lastOpenedDialog: 1
 }
 
 type InitialStateType = typeof initialState
@@ -59,6 +61,12 @@ const messageReducer = (state = initialState, action: any): InitialStateType => 
                 })
             }
         }
+        case CHANGE_LAST_OPENED_DIALOG: {
+           return {
+              ...state,
+              lastOpenedDialog: action.payload
+           }
+        }
         default:
             return state;
     }
@@ -71,7 +79,12 @@ type SendMessageActionType = {
 type ClearNewStatusActionType = {
    type: typeof CLEAR_NEW_STATUS
 }
+type ChangeLastOpenedDialogType ={
+   type: typeof CHANGE_LAST_OPENED_DIALOG
+   payload: number
+}
 
 export const sendMessageActionCreator = (text: string): SendMessageActionType => ({type: SEND_MESSAGE, text: text});
 export const clearNewStatusActionCreator = (): ClearNewStatusActionType => ({type: CLEAR_NEW_STATUS})
+export const changeLastOpenedDialog = (dialog: number): ChangeLastOpenedDialogType => ({type: CHANGE_LAST_OPENED_DIALOG, payload: dialog})
 export default messageReducer;

@@ -49,22 +49,21 @@ const LatestRegistered: React.FC<LatestRegisteredPropsType> = (props) => {
          <Preloader height='200' />
       )
    }
-
-    const usersElements = props.users
-        .map(u => {
-            return (
-                <li key={u.id + '_navbar'}>
-                   <NavLink to={'/profile/' + u.id} className={s.nav_latest_user_item} >
-                     <div className={s.nav_latest_user_avatar}>
-                           <img src={userProfileImage} alt="" />
-                     </div>
-                     <div className={s.nav_latest_user_name}>
-                           {u.name}
-                     </div>
-                    </NavLink>
-                </li>
-            )
-        })
+   const usersElements = props.users
+      .map(u => {
+         return (
+            <li key={u.id + '_navbar'}>
+               <NavLink to={'/profile/' + u.id} className={s.nav_latest_user_item} >
+                  <div className={s.nav_latest_user_avatar}>
+                     <img src={(u.photos && u.photos.small) ? u.photos.small : userProfileImage} alt="" />
+                  </div>
+                  <div className={s.nav_latest_user_name}>
+                     {u.name}
+                  </div>
+               </NavLink>
+            </li>
+         )
+      })
 
    return (
       <div>
@@ -72,7 +71,6 @@ const LatestRegistered: React.FC<LatestRegisteredPropsType> = (props) => {
             {usersElements}
          </ul>
       </div>
-
    )
 }
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ProfileType } from '../types/types';
+import { DataPhotosType, PhotosType, ProfileType, UserType } from '../types/types';
 
 const instance = axios.create({
     withCredentials: true,
@@ -7,51 +7,56 @@ const instance = axios.create({
     headers: {
         "API-KEY": "398d65df-f6f7-4c97-bcae-4a9af02f64f4"
     }
-});
+})
+
+type GetUsersType = {
+   items: UserType[]
+   totalCount: number
+   error: string | null
+}
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => {
-                return response.data;
-            });
-    },
+   getUsers(currentPage = 1, pageSize = 10) {
+      return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`)
+         .then(response => {
+            return response.data;
+         });
+   },
 
-    followUser(userId: number) {
-        return instance.post(`follow/${userId}`)
-            .then(response => {
-                return response.data;
-            })
-    },
+   followUser(userId: number) {
+      return instance.post<ResponseType>(`follow/${userId}`)
+         .then(response => {
+            return response.data;
+         })
+   },
 
-    unfollowUser(userId: number) {
-        return instance.delete(`follow/${userId}`)
-            .then(response => {
-                return response.data;
-            })
-    }
+   unfollowUser(userId: number) {
+      return instance.delete<ResponseType>(`follow/${userId}`)
+         .then(response => {
+            return response.data;
+         })
+   }
 }
 
 export const profileAPI = {
    async getProfile(userId: number) {
       let response
-      try {
-         response = await instance.get(`profile/${userId}`)
-      }
-      catch(e) {
-         console.log(e);
-         response = {}
-      }
-      return response.data;
+      // try {
+         response = await instance.get<ProfileType>(`profile/${userId ? userId : '18732'}`)
+      // }
+      // catch(e) {
+         // return {}
+      // }
+      return response.data
    },
     getStatus(userId: number) {
-       return instance.get(`profile/status/${userId}`)
+       return instance.get<string>(`profile/status/${userId ? userId : '18732'}`)
           .then(response => {
              return response.data;
           })
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status: status})
+        return instance.put<ResponseType>(`profile/status/`, {status: status})
             .then(response => {
                 return response.data;
             })
@@ -59,7 +64,7 @@ export const profileAPI = {
     savePhoto(file: any) {
        const formData = new FormData()
        formData.append('image', file)
-      return instance.put(`profile/photo/`, formData, {
+      return instance.put<ResponseType<DataPhotosType>>(`profile/photo/`, formData, {
          headers: {
             'Content-Type': 'multipart/form-data'
          }
@@ -73,43 +78,36 @@ export const profileAPI = {
   }
 }
 
-type CheckAuthResponseType = {
-   data: {
-      id: number
-      email: string
-      login: string
-   }
-   resultCode: number
+type ResponseType<D = {}> = {
+   data: D
    messages: Array<string>
-}
-type LoginResponseType = {
    resultCode: number
-   messages: Array<string>
-   data: {
-      userId: number
-   }
 }
-type LogoutResponseType = {
-   resultCode: number
-    messages: Array<string>
-    data: {}
+
+type CheckAuthResponseDataType = {
+   id: number
+   email: string
+   login: string
+}
+type LoginResponseDataType = {
+   userId: number
 }
 
 export const authAPI = {
    checkAuth() {
-      return instance.get<CheckAuthResponseType>(`auth/me`)
+      return instance.get<ResponseType<CheckAuthResponseDataType>>(`auth/me`)
          .then(response => {
             return response.data;
          });
    },
    login(email: string, password: string, rememberMe = false, captcha: string | null = null) {
-      return instance.post<LoginResponseType>(`auth/login`, {email, password, rememberMe, captcha})
+      return instance.post<ResponseType<LoginResponseDataType>>(`auth/login`, {email, password, rememberMe, captcha})
          .then(response => {
             return response.data;
          });
    },
    logout() {
-      return instance.delete<LogoutResponseType>(`auth/login`)
+      return instance.delete<ResponseType>(`auth/login`)
          .then(response => {
             return response.data;
          });

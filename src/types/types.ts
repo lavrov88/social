@@ -2,6 +2,9 @@ export type PhotosType = {
    small: string | null
    large: string | null
 }
+export type DataPhotosType = {
+   photos: PhotosType
+}
 
 export type UserType = {
    name: string
@@ -40,4 +43,5 @@ export type LinkType = {
 export type NavUserType = {
    id: number
    name: string
+   photos: PhotosType
 }
